@@ -1,5 +1,5 @@
 
-#sky
+#gamecontainer
 {
    position: absolute;
    width: 100%;
@@ -19,4 +19,8 @@
    width: 88px;
    height: 106px;
    background-image: url('../assets/mainAircraft1.png');
+}
+
+.active {
+    z-index: 2;
 }
