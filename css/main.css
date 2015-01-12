@@ -1,0 +1,14 @@
+
+#sky
+{
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   background-color: grey;
+   background-image: url('../assets/background.png');
+   background-repeat: repeat; 
+   
+   -webkit-animation: animSky 7s linear infinite;
+   animation: animSky 7s linear infinite;
+}
+
