@@ -5,10 +5,8 @@
    width: 100%;
    height: 100%;
    background-image: url('../assets/background.png');
-   background-repeat: repeat; 
+   background-repeat: repeat;   
    
-   -webkit-animation: animSky 7s linear infinite;
-   animation: animSky 7s linear infinite;
 }
 
 #player
