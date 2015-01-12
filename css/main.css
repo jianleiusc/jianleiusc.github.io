@@ -4,7 +4,6 @@
    position: absolute;
    width: 100%;
    height: 100%;
-   background-color: grey;
    background-image: url('../assets/background.png');
    background-repeat: repeat; 
    
@@ -12,3 +11,14 @@
    animation: animSky 7s linear infinite;
 }
 
+#player
+{
+   left: 48%;
+   top: 80%;
+}
+.aircraft{
+   position: absolute;
+   width: 88px;
+   height: 106px;
+   background-image: url('../assets/mainAircraft1.png');
+}
