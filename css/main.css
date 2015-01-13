@@ -18,21 +18,39 @@
 
 
 @-webkit-keyframes animBack {
-   0% { background-position: 0px 0px; }
-   100% { background-position: 0px 500px; }
+   0% { background-position: 0px -300px; }
+   100% { background-position: 0px 435px; }
 }
 @-moz-keyframes animBack {
-   0% { background-position: 0px 0px; }
-   100% { background-position: 0px 500px; }
+   0% { background-position: 0px -300px; }
+   100% { background-position: 0px 435px; }
 }
 @-o-keyframes animBack {
-   0% { background-position: 0px 0px; }
-   100% { background-position: 0px 500px; }
+   0% { background-position: 0px -300px; }
+   100% { background-position: 0px 435px; }
 }
 @keyframes animBack {
-   0% { background-position: 0px 0px; }
-   100% { background-position: 0px 500px; }
+   0% { background-position: 0px -300px; }
+   100% { background-position: 0px 435px; }
 }
+
+@-webkit-keyframes animBullet {
+   0% { top: 500px; }
+   100% { top: -100px; }
+}
+@-moz-keyframes animBullet {
+    0% { top: 500px; }
+   100% { top: 0px; } 
+}
+@-o-keyframes animBullet {
+0% { top: 500px; }
+   100% { top: 0px; }
+}
+@keyframes animBullet {
+   0% { top: 500px; }
+   100% { top: 0px; }
+}
+
 #background
 {
    position: absolute;
@@ -68,4 +86,13 @@
    background-image: url('../assets/smallAircraft1.png');
    -webkit-animation: animEnemy 7500ms linear infinite;
    animation: animEnemy 7500ms linear infinite;
+}
+
+.bullet{
+   position: absolute;
+   width: 10px;
+   height: 20px;
+   background-image: url('../assets/redBullet.png');
+   -webkit-animation: animBullet 2500ms linear infinite;
+   animation: animBullet 2500ms linear infinite;
 }

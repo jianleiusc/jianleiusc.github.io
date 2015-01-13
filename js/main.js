@@ -7,6 +7,7 @@ var score = 0;
 var enimies = new Array();
 
 //loops
+var loopBulletloop;
 var loopGameloop;
 var loopEnemyloop;
 $(document).ready(function(){
@@ -35,10 +36,25 @@ function startGame(){
       $(".aircraft").show();
    }
     var updaterate = 1000.0 / 60.0 ; //60 times a second
+    loopBulletloop = setInterval(shootbullet,200);
     loopGameloop = setInterval(gameloop, updaterate);
     loopEnemyloop = setInterval(updateEnemies, 700);
 }
-
+function shootbullet(){
+   $(".bullet").filter(function() { return $(this).position().top <= 1; }).remove()
+   var randomId = Math.floor(Math.random()*1000);
+   randomId = randomId.toString();
+   var bullet = $('<div class="bullet animated" id= "'+ randomId + '" ></div>');
+   //create the bounding box
+   var box = document.getElementById('player').getBoundingClientRect();
+   var boxwidth = 84;
+   var boxheight = 100;
+   //set the position of bullet 
+   
+   bullet.css('top', box.top + 100 + 'px');
+   bullet.css('left',boxwidth/2 + box.left - 8 + 'px');
+   $("#gamecontainer").append(bullet);
+}
 function gameloop(){
     //colision to be done
 }
