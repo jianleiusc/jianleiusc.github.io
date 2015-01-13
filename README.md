@@ -1,4 +1,4 @@
-AirplaneWar game HTML5
+AircraftWar game HTML5
 =========
 Initially, I wanted to try recreating Wechat percil aircraft in HTML5, CSS3 using a canvas and recycling the assets from the old game.
 
