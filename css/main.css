@@ -1,12 +1,48 @@
 
-#gamecontainer
+@-webkit-keyframes animEnemy {
+   0% { top: -100px; }
+   100% { top: 900px; }
+}
+@-moz-keyframes animEnemy {
+   0% { top: -100px; }
+   100% { top: 900px; }
+}
+@-o-keyframes animEnemy {
+0% { top: -100px; }
+   100% { top: 900px; }
+}
+@keyframes animEnemy {
+   0% { top: -100px; }
+   100% { top: 900px; }
+}
+
+
+@-webkit-keyframes animBack {
+   0% { background-position: 0px 0px; }
+   100% { background-position: 0px 500px; }
+}
+@-moz-keyframes animBack {
+   0% { background-position: 0px 0px; }
+   100% { background-position: 0px 500px; }
+}
+@-o-keyframes animBack {
+   0% { background-position: 0px 0px; }
+   100% { background-position: 0px 500px; }
+}
+@keyframes animBack {
+   0% { background-position: 0px 0px; }
+   100% { background-position: 0px 500px; }
+}
+#background
 {
    position: absolute;
    width: 100%;
    height: 100%;
    background-image: url('../assets/background.png');
-   background-repeat: repeat;   
-   
+   background-repeat: repeat; 
+   background-position: 0px 0px;
+   -webkit-animation: animBack 7500ms linear infinite;
+   animation: animBack 7500ms linear infinite;
 }
 
 #player
@@ -16,11 +52,20 @@
 }
 .aircraft{
    position: absolute;
-   width: 88px;
-   height: 106px;
+   width: 84px;
+   height: 100px;
    background-image: url('../assets/mainAircraft1.png');
 }
 
 .active {
     z-index: 2;
+}
+
+.enemy{
+   position: absolute;   
+   width: 48px;
+   height: 38px;
+   background-image: url('../assets/smallAircraft1.png');
+   -webkit-animation: animEnemy 7500ms linear infinite;
+   animation: animEnemy 7500ms linear infinite;
 }
