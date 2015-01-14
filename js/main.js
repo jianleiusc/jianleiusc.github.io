@@ -6,6 +6,13 @@ var score = 0;
 
 var enimies = new Array();
 
+
+//Handle mouse event OR touch event
+var isTouchSupported = 'ontouchstart' in window;
+var startEvent = isTouchSupported ? 'touchstart' : 'mousedown';
+var moveEvent = isTouchSupported ? 'touchmove' : 'mousemove';
+var endEvent = isTouchSupported ? 'touchend' : 'mouseup'; 
+
 //loops
 var loopBulletloop;
 var loopGameloop;
@@ -72,16 +79,17 @@ function updateEnemies(){
    enimies.push(newenemy);
 }
 //handle mouse drag
-$('#player').on('mousedown', function (e) {
 
-    $(this).addClass('active').parents().on('mousemove', function (e) {
+$('#player').on(startEvent, function (e) {
+
+    $(this).addClass('active').parents().on(moveEvent, function (e) {
         
         $('.active').offset({
 
             top: e.pageY - $('.active').outerHeight() / 2,
             left: e.pageX - $('.active').outerWidth() / 2
 
-        }).on('mouseup', function () {
+        }).on(endEvent, function () {
 
             $(this).removeClass('active');            
 
