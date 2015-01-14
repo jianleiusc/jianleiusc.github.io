@@ -7,6 +7,7 @@ What I did instead is something way more primitive. This project uses nothing bu
 Live App
 ------------
 Check out a live preview of it over here: http://jianleiusc.github.io/
+
 To be done
 -----------
 1. The color of aircrafts is not consistent with the background
