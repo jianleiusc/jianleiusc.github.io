@@ -78,14 +78,14 @@ function updateEnemies(){
    $("#gamecontainer").append(newenemy);
    enimies.push(newenemy);
 }
-//handle mouse drag
-
-$('#player').on(startEvent, function (e) {
+//handle mouse drag or touch
+if(!isTouchSupported)
+    $('#player').on(startEvent, function (e) {
 
     $(this).addClass('active').parents().on(moveEvent, function (e) {
         
         $('.active').offset({
-
+            
             top: e.pageY - $('.active').outerHeight() / 2,
             left: e.pageX - $('.active').outerWidth() / 2
 
@@ -97,8 +97,26 @@ $('#player').on(startEvent, function (e) {
 
     });
     return false;    
-});
+    });
+else
+    $('#player').on(startEvent, function (e) {
 
+    $(this).addClass('active').parents().on(moveEvent, function (e) {
+        
+        $('.active').offset({
+            
+            top: e.touches[0].pageY - $('.active').outerHeight() / 2,
+            left: e.touches[0].pageX - $('.active').outerWidth() / 2
+
+        }).on(endEvent, function () {
+
+            $(this).removeClass('active');            
+
+        });
+
+    });
+    return false;    
+    });
 
 
 
