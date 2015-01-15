@@ -79,7 +79,7 @@ function updateEnemies(){
    enimies.push(newenemy);
 }
 //handle mouse drag or touch
-if(!isTouchSupported){
+//if(!isTouchSupported){
     $('#player').on(startEvent, function (e) {
 
     $(this).addClass('active').parents().on(moveEvent, function (e) {
@@ -99,15 +99,14 @@ if(!isTouchSupported){
     return false;    
     });
     //window.alert(5 + 6);  
-}
-else
+//}
+//else
     $('#player').on('touchmove', function(event) {
   // If there's exactly one finger inside this element
-  
+    window.alert(5 + 6);
     var touch = event.targetTouches[0];
     // Place element where the finger is
     $('.active').offset({top:touch.pageY,left:touch.pageX});
-    console.log(5 + 6);
   
 }, false); 
 //    $('#player').on(startEvent, function (e) {
