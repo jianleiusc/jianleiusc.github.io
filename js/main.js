@@ -105,8 +105,8 @@ else
         
         $('.active').offset({
             
-            top: e.touches[0].pageY - $('.active').outerHeight() / 2,
-            left: e.touches[0].pageX - $('.active').outerWidth() / 2
+            top: e.targetTouches[0].pageY - $('.active').outerHeight() / 2,
+            left: e.targetTouches[0].pageX - $('.active').outerWidth() / 2
 
         }).on(endEvent, function () {
 
