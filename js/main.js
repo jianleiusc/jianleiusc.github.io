@@ -101,7 +101,7 @@ function updateEnemies(){
     //window.alert(5 + 6);  
 //}
 //else
-    $('#player').on('touchmove', function(event) {
+    $('#player').on('tap', function(event) {
   // If there's exactly one finger inside this element
     window.alert(5 + 6);
     var touch = event.targetTouches[0];
