@@ -120,9 +120,8 @@ function updateEnemies(){
     $('#player').on('touchstart', function (e) {
 
     $(this).addClass('active').parents().on('touchmove', function (e) {
-        
+        window.alert(6 + 6);
         $('.active').offset({
-            
             top: e.targetTouches[0].pageY - $('.active').outerHeight() / 2,
             left: e.targetTouches[0].pageX - $('.active').outerWidth() / 2
 
@@ -133,7 +132,6 @@ function updateEnemies(){
         });
 
     });
-    window.alert(5 + 6);
     return false;    
     });
 
