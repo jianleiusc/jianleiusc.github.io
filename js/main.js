@@ -69,9 +69,7 @@ function gameloop(){
 function updateEnemies(){
    //Do any pipes need removal?
    $(".enemy").filter(function() { return $(this).position().top >=  $(window).height() - 90; }).remove()
-   var randomId = Math.floor(Math.random()*1000);
-   randomId = randomId.toString();
-   var newenemy = $('<div class="enemy animated" id= "'+ randomId + '" ></div>');
+   var newenemy = $('<div class="enemy animated" ></div>');
    //set the position of enemies randomly
    newenemy.css('top','0px');
    newenemy.css('left',Math.floor(Math.random()*($(window).width()- 48) )+'px'); 
