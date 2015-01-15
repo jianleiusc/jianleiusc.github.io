@@ -99,24 +99,32 @@ if(!isTouchSupported)
     return false;    
     });
 else
-    $('#player').on(startEvent, function (e) {
-
-    $(this).addClass('active').parents().on(moveEvent, function (e) {
-        
-        $('.active').offset({
-            
-            top: e.targetTouches[0].pageY - $('.active').outerHeight() / 2,
-            left: e.targetTouches[0].pageX - $('.active').outerWidth() / 2
-
-        }).on(endEvent, function () {
-
-            $(this).removeClass('active');            
-
-        });
-
-    });
-    return false;    
-    });
+    $('#player').on('touchmove', function(event) {
+  // If there's exactly one finger inside this element
+  if (event.targetTouches.length == 1) {
+    var touch = event.targetTouches[0];
+    // Place element where the finger is
+    $('.active').offset({top:touch.pageY,left:touch.pageX});
+  }
+}, false); 
+//    $('#player').on(startEvent, function (e) {
+//
+//    $(this).addClass('active').parents().on(moveEvent, function (e) {
+//        
+//        $('.active').offset({
+//            
+//            top: e.targetTouches[0].pageY - $('.active').outerHeight() / 2,
+//            left: e.targetTouches[0].pageX - $('.active').outerWidth() / 2
+//
+//        }).on(endEvent, function () {
+//
+//            $(this).removeClass('active');            
+//
+//        });
+//
+//    });
+//    return false;    
+//    });
 
 
 
