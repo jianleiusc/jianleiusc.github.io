@@ -104,36 +104,36 @@ function updateEnemies(){
 //}
 //else
 
-    $('#player').on('touchstart', function(e) {
-  // If there's exactly one finger inside this element
-    window.alert(5 + 6);
-    var touch = e.targetTouches[0];
-    // Place element where the finger is
-    $('.active').offset({top:touch.pageY,left:touch.pageX});
-  
-}); 
+//    $('#player').on('touchstart', function(e) {
+//  // If there's exactly one finger inside this element
+//    window.alert(5 + 6);
+//    var touch = e.targetTouches[0];
+//    // Place element where the finger is
+//    $('.active').offset({top:touch.pageY,left:touch.pageX});
+//  
+//}); 
 
 //$('#player').on({ 'mousedown' : function(e){ /* do something... */ } });
 
 
-//    $('#player').on(startEvent, function (e) {
-//
-//    $(this).addClass('active').parents().on(moveEvent, function (e) {
-//        
-//        $('.active').offset({
-//            
-//            top: e.targetTouches[0].pageY - $('.active').outerHeight() / 2,
-//            left: e.targetTouches[0].pageX - $('.active').outerWidth() / 2
-//
-//        }).on(endEvent, function () {
-//
-//            $(this).removeClass('active');            
-//
-//        });
-//
-//    });
-//    return false;    
-//    });
+    $('#player').on('touchstart', function (e) {
+
+    $(this).addClass('active').parents().on('touchmove', function (e) {
+        
+        $('.active').offset({
+            
+            top: e.targetTouches[0].pageY - $('.active').outerHeight() / 2,
+            left: e.targetTouches[0].pageX - $('.active').outerWidth() / 2
+
+        }).on('touchend', function () {
+
+            $(this).removeClass('active');            
+
+        });
+
+    });
+    return false;    
+    });
 
 
 
