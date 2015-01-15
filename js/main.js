@@ -113,6 +113,7 @@ function updateEnemies(){
 //  
 //}); 
 
+
 //$('#player').on({ 'mousedown' : function(e){ /* do something... */ } });
 
 
