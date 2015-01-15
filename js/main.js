@@ -133,6 +133,7 @@ function updateEnemies(){
         });
 
     });
+    window.alert(5 + 6);
     return false;    
     });
 
