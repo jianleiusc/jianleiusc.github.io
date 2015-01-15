@@ -120,13 +120,12 @@ function updateEnemies(){
     $('#player').on('touchstart', function (e) {
 
     $(this).addClass('active').parents().on('touchmove', function (e) {
-        window.alert(6 + 6);
         $('.active').offset({
             top: e.targetTouches[0].pageY - $('.active').outerHeight() / 2,
             left: e.targetTouches[0].pageX - $('.active').outerWidth() / 2
 
         }).on('touchend', function () {
-
+            window.alert(e.targetTouches[0].pageY);
             $(this).removeClass('active');            
 
         });
