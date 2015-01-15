@@ -79,52 +79,36 @@ function updateEnemies(){
    enimies.push(newenemy);
 }
 //handle mouse drag or touch
-//if(!isTouchSupported){
+if(!isTouchSupported){
 
-//    $('#player').on(startEvent, function (e) {
-//
-//    $(this).addClass('active').parents().on(moveEvent, function (e) {
-//        
-//        $('.active').offset({
-//            
-//            top: e.pageY - $('.active').outerHeight() / 2,
-//            left: e.pageX - $('.active').outerWidth() / 2
-//
-//        }).on(endEvent, function () {
-//
-//            $(this).removeClass('active');            
-//
-//        });
-//
-//    });
-//    return false;    
-//    });
+    $('#player').on(startEvent, function (e) {
 
-    //window.alert(5 + 6);  
-//}
-//else
+    $(this).addClass('active').parents().on(moveEvent, function (e) {
+        
+        $('.active').offset({
+            
+            top: e.pageY - $('.active').outerHeight() / 2,
+            left: e.pageX - $('.active').outerWidth() / 2
 
-//    $('#player').on('touchstart', function(e) {
-//  // If there's exactly one finger inside this element
-//    window.alert(5 + 6);
-//    var touch = e.targetTouches[0];
-//    // Place element where the finger is
-//    $('.active').offset({top:touch.pageY,left:touch.pageX});
-//  
-//}); 
+        }).on(endEvent, function () {
 
+            $(this).removeClass('active');            
 
-//$('#player').on({ 'mousedown' : function(e){ /* do something... */ } });
+        });
 
+    });
+    return false;    
+    });
+    }
+else
+    $('#player').on(startEvent, function (e) {
 
-    $('#player').on('touchstart', function (e) {
-
-    $(this).addClass('active').parents().on('touchmove', function (e) {
+    $(this).addClass('active').parents().on(moveEvent, function (e) {
         $('.active').offset({
             top: e.originalEvent.targetTouches[0].pageY - $('.active').outerHeight() / 2,
             left: e.originalEvent.targetTouches[0].pageX - $('.active').outerWidth() / 2
 
-        }).on('touchend', function () {
+        }).on(endEvent, function () {
            // window.alert(e.originalEvent.targetTouches[0].pageY);
             $(this).removeClass('active');            
 
