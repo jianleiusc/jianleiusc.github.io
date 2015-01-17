@@ -9,11 +9,9 @@ Check out a live preview of it over here: http://jianleiusc.github.io/
 
 To be done
 -----------
-1. The color of aircrafts is not consistent with the background
-2. Bugs that some enemy aircraft is not removed from game container, and will reappear
-3. The collision is not implemented yet(will be done in several days)
-4. Score feature, sound effects need to be added
-5. More types of enemy aircrafts need to be implemented
+1. Bugs that some enemy aircraft is not removed from game container, and will reappear
+2. Score feature, sound effects need to be added
+3. More types of enemy aircrafts need to be implemented
 
 Notice
 =====
