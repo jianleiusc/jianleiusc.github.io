@@ -81,8 +81,8 @@
 
 .enemy{
    position: absolute;   
-   width: 48px;
-   height: 38px;
+   width: 42px;
+   height: 32px;
    background-image: url('../assets/smallAircraft1.png');
    -webkit-animation: animEnemy 7500ms linear infinite;
    animation: animEnemy 7500ms linear infinite;
