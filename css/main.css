@@ -90,8 +90,8 @@
 
 .bullet{
    position: absolute;
-   width: 10px;
-   height: 20px;
+   width: 8px;
+   height: 16px;
    background-image: url('../assets/redBullet.png');
    -webkit-animation: animBullet 2500ms linear infinite;
    animation: animBullet 2500ms linear infinite;

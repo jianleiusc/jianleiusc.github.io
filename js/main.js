@@ -4,8 +4,8 @@ var velocity = 0;
 var position = 180;
 var score = 0;
 
-var enimies = new Array();
-
+//var enimies = new Array();
+var bullets = new Array();
 
 //Handle mouse event OR touch event
 var isTouchSupported = 'ontouchstart' in window;
@@ -44,8 +44,9 @@ function startGame(){
    }
     var updaterate = 1000.0 / 60.0 ; //60 times a second
     loopBulletloop = setInterval(shootbullet,200);
-    loopGameloop = setInterval(gameloop, updaterate);
     loopEnemyloop = setInterval(updateEnemies, 700);
+    loopGameloop = setInterval(gameloop, updaterate);
+
 }
 function shootbullet(){
    $(".bullet").filter(function() { return $(this).position().top <= 1; }).remove()
@@ -61,21 +62,126 @@ function shootbullet(){
    bullet.css('top', box.top + 100 + 'px');
    bullet.css('left',boxwidth/2 + box.left - 8 + 'px');
    $("#gamecontainer").append(bullet);
-}
-function gameloop(){
-    //colision to be done
+   bullets.push(bullet);
 }
 
+function gameloop(){
+    //collision detection between enemies and aircraft
+    var aircraftBox = document.getElementById('player').getBoundingClientRect();
+    var aircraftX = [aircraftBox.left + aircraftBox.width/2, aircraftBox.left, aircraftBox.left, aircraftBox.left + aircraftBox.width, aircraftBox.left + aircraftBox.width];
+    var aircraftY = [aircraftBox.top, aircraftBox.top + aircraftBox.height*2/3, aircraftBox.top + aircraftBox.height, aircraftBox.top + aircraftBox.height, aircraftBox.top + aircraftBox.height*2/3];
+    var enemies = $(".enemy"); 
+    for( var i in enemies ){ 
+        if(i < enemies.length ) { //i may equal to enimies.length because some enemycraft has been deleted
+        var enemyBox = enemies[i].getBoundingClientRect();
+        var enemyboxX = [enemyBox.left + enemyBox.width/3, enemyBox.left, enemyBox.left + enemyBox.width/2, enemyBox.left + enemyBox.width, enemyBox.left + enemyBox.width*2/3];
+        var enemyboxY = [enemyBox.top, enemyBox.top + enemyBox.height*2/5, enemyBox.top + enemyBox.height, enemyBox.top + enemyBox.height*2/5 ,enemyBox.top];
+        if (collisionConvexPolygon( aircraftX, aircraftY, enemyboxX, enemyboxY )) {
+                // collision detected!
+                playerDead();
+            }
+ 
+        }
+    }
+    $(".enemy").filter(function() { return $(this).position().top >=  $(window).height() - 90; }).remove();
+    // collision detection between enemies and bullets   
+}
+
+function collisionConvexPolygon( vertsax, vertsay, vertsbx, vertsby ) {
+    var alen = vertsax.length;
+    var blen = vertsbx.length;
+    // Loop for axes in Shape A
+    for ( var i = 0, j = alen - 1; i < alen; j = i++ ) {
+        // Get the axis
+        var vx =    vertsay[ i ] - vertsay[ j ];
+        var vy = -( vertsax[ i ] - vertsax[ j ] ); 
+        var len = Math.sqrt( vx * vx + vy * vy );
+
+        vx /= len;
+        vy /= len;
+
+        // Project shape A
+        var max0 = vertsax[ 0 ] * vx + vertsay[ 0 ] * vy, min0 = max0;
+        for ( k = 1; k < alen; k++ ) {
+            var proja = vertsax[ k ] * vx + vertsay[ k ] * vy;
+
+            if ( proja > max0 ) {
+                max0 = proja;
+            }
+            else if ( proja < min0 ) {
+                min0 = proja;
+            }
+        }
+        // Project shape B
+        var max1 = vertsbx[ 0 ] * vx + vertsby[ 0 ] * vy, min1 = max1;
+        for ( var k = 1; k < blen; k++ ) {
+            var projb = vertsbx[ k ] * vx + vertsby[ k ] * vy;
+
+            if ( projb > max1 ) {
+                max1 = projb;
+            }
+            else if ( projb < min1 ) {
+                min1 = projb;
+            }
+        }
+        // Test for gaps
+        if ( !axisOverlap( min0, max0, min1, max1 ) ) {
+            return false;
+        }
+    }
+    // Loop for axes in Shape B (same as above)
+    for ( var i = 0, j = blen - 1; i < blen; j = i++ ) {
+        var vx =    vertsbx[ j ] - vertsbx[ i ];
+        var vy = -( vertsby[ j ] - vertsby[ i ] );
+        var len = Math.sqrt( vx * vx + vy * vy );
+
+        vx /= len;
+        vy /= len;
+
+        var max0 = vertsax[ 0 ] * vx + vertsay[ 0 ] * vy, min0 = max0;
+        for ( k = 1; k < alen; k++ ) {
+            var proja = vertsax[ k ] * vx + vertsay[ k ] * vy;
+
+            if ( proja > max0 ) {
+                max0 = proja;
+            }
+            else if ( proja < min0 ) {
+                min0 = proja;
+            }
+        }
+        var max1 = vertsbx[ 0 ] * vx + vertsby[ 0 ] * vy, min1 = max1;
+        for ( var k = 1; k < blen; k++ ) {
+            var projb = vertsbx[ k ] * vx + vertsby[ k ] * vy;
+
+            if ( projb > max1 ) {
+                max1 = projb;
+            }
+            else if ( projb < min1 ) {
+                min1 = projb;
+            }
+        }
+        if ( !axisOverlap( min0, max0, min1, max1 ) ) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function axisOverlap ( a0, a1, b0, b1 ) {
+    return !( a0 > b1 || b0 > a1 );
+}
+ 
 function updateEnemies(){
-   //Do any pipes need removal?
-   $(".enemy").filter(function() { return $(this).position().top >=  $(window).height() - 90; }).remove()
+   //Do any enemies need removal?
    var newenemy = $('<div class="enemy animated" ></div>');
    //set the position of enemies randomly
    newenemy.css('top','0px');
    newenemy.css('left',Math.floor(Math.random()*($(window).width()- 48) )+'px'); 
    $("#gamecontainer").append(newenemy);
-   enimies.push(newenemy);
+   //enimies.push(newenemy);
 }
+
+
 //handle mouse drag or touch
 if(!isTouchSupported){
 
@@ -115,6 +221,10 @@ else
     });
     return false;    
     });
-
+function playerDead(){
+   //stop animating everything!
+   $(".animated").css('animation-play-state', 'paused');
+   $(".animated").css('-webkit-animation-play-state', 'paused');
+}
 
 
