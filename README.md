@@ -2,19 +2,16 @@ AircraftWar game HTML5
 =========
 Initially, I wanted to try recreating Wechat percil aircraft in HTML5, CSS3 using a canvas and recycling the assets from the old game.
 
-What I did instead is something way more primitive. This project uses nothing but good ol' div's for all the objects and graphics, will scale perfectly on almost any screen (mobile and desktop), is terribly unoptimized, laggy, and isn't nearly as fast as it would've been if I had just used a canvas instead. But here it is!
-
+Recreated Wechat Pencil aircraft game in HTML5, CSS3, Jquery using divs and recycling the assets from the old game.I Used Separating Axis Theorem to implement collision detections. It is able to scale on almost any screen (mobile and desktop). 
 Live App
 ------------
 Check out a live preview of it over here: http://jianleiusc.github.io/
 
 To be done
 -----------
-1. The color of aircrafts is not consistent with the background
-2. Bugs that some enemy aircraft is not removed from game container, and will reappear
-3. The collision is not implemented yet(will be done in several days)
-4. Score feature, sound effects need to be added
-5. More types of enemy aircrafts need to be implemented
+1. Bugs that some enemy aircraft is not removed from game container, and will reappear
+2. Score feature, sound effects need to be added
+3. More types of enemy aircrafts need to be implemented
 
 Notice
 =====
