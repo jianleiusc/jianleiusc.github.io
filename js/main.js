@@ -5,7 +5,7 @@ var position = 180;
 var score = 0;
 
 //var enimies = new Array();
-var bullets = new Array();
+//var bullets = new Array();
 
 //Handle mouse event OR touch event
 var isTouchSupported = 'ontouchstart' in window;
@@ -62,7 +62,7 @@ function shootbullet(){
    bullet.css('top', box.top + 100 + 'px');
    bullet.css('left',boxwidth/2 + box.left - 8 + 'px');
    $("#gamecontainer").append(bullet);
-   bullets.push(bullet);
+   //bullets.push(bullet);
 }
 
 function gameloop(){
@@ -73,14 +73,28 @@ function gameloop(){
     var enemies = $(".enemy"); 
     for( var i in enemies ){ 
         if(i < enemies.length ) { //i may equal to enimies.length because some enemycraft has been deleted
-        var enemyBox = enemies[i].getBoundingClientRect();
-        var enemyboxX = [enemyBox.left + enemyBox.width/3, enemyBox.left, enemyBox.left + enemyBox.width/2, enemyBox.left + enemyBox.width, enemyBox.left + enemyBox.width*2/3];
-        var enemyboxY = [enemyBox.top, enemyBox.top + enemyBox.height*2/5, enemyBox.top + enemyBox.height, enemyBox.top + enemyBox.height*2/5 ,enemyBox.top];
-        if (collisionConvexPolygon( aircraftX, aircraftY, enemyboxX, enemyboxY )) {
+            var enemyBox = enemies[i].getBoundingClientRect();
+            var enemyboxX = [enemyBox.left + enemyBox.width/3, enemyBox.left, enemyBox.left + enemyBox.width/2, enemyBox.left + enemyBox.width, enemyBox.left + enemyBox.width*2/3];
+            var enemyboxY = [enemyBox.top, enemyBox.top + enemyBox.height*2/5, enemyBox.top + enemyBox.height, enemyBox.top + enemyBox.height*2/5 ,enemyBox.top];
+            if (collisionConvexPolygon( aircraftX, aircraftY, enemyboxX, enemyboxY )) {
                 // collision detected!
-                playerDead();
+                    playerDead();
+                }
+            var bullets = $(".bullet");
+            for(var j in bullets){
+                if(j < bullets.length){
+                    var bulletBox = bullets[j].getBoundingClientRect();
+                    var bulletboxX = [bulletBox.left, bulletBox.left, bulletBox.right, bulletBox.right];
+                    var bulletboxY = [bulletBox.top, bulletBox.bottom, bulletBox.bottom, bulletBox.top];
+                    if(collisionConvexPolygon(enemyboxX, enemyboxY, bulletboxX, bulletboxY)){
+                        playScore();
+                        // to do animation and sound effets
+                        enemies[i].remove();
+                        bullets[j].remove();
+                    }
+                
+                }
             }
- 
         }
     }
     $(".enemy").filter(function() { return $(this).position().top >=  $(window).height() - 90; }).remove();
@@ -225,6 +239,74 @@ function playerDead(){
    //stop animating everything!
    $(".animated").css('animation-play-state', 'paused');
    $(".animated").css('-webkit-animation-play-state', 'paused');
+    //destroy our loops
+    clearInterval(loopBulletloop);
+    clearInterval(loopGameloop);
+    clearInterval(loopEnemyloop);
+    loopGameloop = null;
+    loopGameloop = null;
+    loopEnemyloop = null;
+    //mobile browsers don't support buzz bindOnce event
+    if(isIncompatible.any())
+   {
+      //skip right to showing score
+      showScore();
+   }
+   else
+   {
+      //play the hit sound (then the dead sound) and then show score
+//      soundHit.play().bindOnce("ended", function() {
+//         soundDie.play().bindOnce("ended", function() {
+//            showScore();
+//         });
+//      });
+   }
 }
 
+function showScore(){
+    //to do 
+}
+
+function setBigScore(erase)
+{
+   var elemscore = $("#bigscore");
+   elemscore.empty();
+   
+   if(erase)
+      return;
+   
+   var digits = score.toString().split('');
+   for(var i = 0; i < digits.length; i++)
+      elemscore.append("<img src='../assets/font_big_" + digits[i] + ".png' alt='" + digits[i] + "'>");
+}
+function playScore(){
+    score += 100;
+   //play hit sound
+  // soundScore.stop();
+   //soundScore.play();
+   setBigScore();
+}
+
+var isIncompatible = {
+   Android: function() {
+   return navigator.userAgent.match(/Android/i);
+   },
+   BlackBerry: function() {
+   return navigator.userAgent.match(/BlackBerry/i);
+   },
+   iOS: function() {
+   return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+   },
+   Opera: function() {
+   return navigator.userAgent.match(/Opera Mini/i);
+   },
+   Safari: function() {
+   return (navigator.userAgent.match(/OS X.*Safari/) && ! navigator.userAgent.match(/Chrome/));
+   },
+   Windows: function() {
+   return navigator.userAgent.match(/IEMobile/i);
+   },
+   any: function() {
+   return (isIncompatible.Android() || isIncompatible.BlackBerry() || isIncompatible.iOS() || isIncompatible.Opera() || isIncompatible.Safari() || isIncompatible.Windows());}
+}
 
