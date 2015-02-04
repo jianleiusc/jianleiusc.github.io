@@ -22,6 +22,8 @@ var loopEnemyloop;
 var gameSound = new buzz.sound("assets/game_music.mp3");
 var gameOver = new buzz.sound("assets/game_over.mp3");
 var enemyDown = new buzz.sound("assets/enemy1_down.mp3");
+buzz.all().setVolume(volume);
+
 $(document).ready(function(){
     //updateEnemies();
     showSplash();
