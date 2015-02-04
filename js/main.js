@@ -17,6 +17,11 @@ var endEvent = isTouchSupported ? 'touchend' : 'mouseup';
 var loopBulletloop;
 var loopGameloop;
 var loopEnemyloop;
+
+//sound
+var gameSound = new buzz.sound("assets/game_music.mp3");
+var gameOver = new buzz.sound("assets/game_over.mp3");
+var enemyDown = new buzz.sound("assets/enemy1_down.mp3");
 $(document).ready(function(){
     //updateEnemies();
     showSplash();
@@ -43,6 +48,7 @@ function startGame(){
       $(".aircraft").show();
    }
     var updaterate = 1000.0 / 60.0 ; //60 times a second
+    gameSound.play();
     loopBulletloop = setInterval(shootbullet,200);
     loopEnemyloop = setInterval(updateEnemies, 700);
     loopGameloop = setInterval(gameloop, updaterate);
@@ -91,6 +97,7 @@ function gameloop(){
                         // to do animation and sound effets
                         enemies[i].remove();
                         bullets[j].remove();
+                        enemyDown.play();
                     }
                 
                 }
@@ -240,6 +247,9 @@ function playerDead(){
    $(".animated").css('animation-play-state', 'paused');
    $(".animated").css('-webkit-animation-play-state', 'paused');
     //destroy our loops
+    gameOver.play();
+    gameSound.stop();
+    
     clearInterval(loopBulletloop);
     clearInterval(loopGameloop);
     clearInterval(loopEnemyloop);
